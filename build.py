@@ -77,7 +77,8 @@ def generate_html(has_event: bool, days_count: int, latest_event: dict | None) -
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         '<title>Est-ce que Trump a encore dit une connerie aujourd\'hui ?</title>',
         '</head>',
-        '<body>',
+        '<body style="margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;">',
+        '<div style="text-align: center;">',
         f'<h1>{indicator}</h1>',
     ]
     
@@ -95,6 +96,7 @@ def generate_html(has_event: bool, days_count: int, latest_event: dict | None) -
         html_parts.append('<p>Aucune entrée enregistrée.</p>')
     
     html_parts.extend([
+        '</div>',
         '</body>',
         '</html>',
     ])
