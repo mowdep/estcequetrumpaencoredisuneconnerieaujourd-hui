@@ -26,7 +26,7 @@ YYYY-MM-DD|URL|Titre|URLMiniature (optionnel)
 
 **Règles :**
 - 1 ligne = 1 événement
-- Aucune ligne vide
+- Les lignes vides sont ignorées
 - Aucun commentaire
 - Les champs sont séparés par `|`
 - La miniature est optionnelle

@@ -124,9 +124,9 @@ def main():
     # Get latest event
     latest_event = get_latest_event(events)
     
-    # Calculate days since last event
+    # Calculate days since last event (cap at 0 for future dates)
     if latest_event:
-        days_count = calculate_days_since(latest_event['date'], today)
+        days_count = max(0, calculate_days_since(latest_event['date'], today))
     else:
         days_count = 0
     
