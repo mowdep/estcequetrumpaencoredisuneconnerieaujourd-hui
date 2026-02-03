@@ -2,9 +2,11 @@
 """Génère un site statique à partir de data/events.md."""
 
 import re
+import urllib.error
 import urllib.request
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).parent
 EVENTS_FILE = ROOT / "data" / "events.md"
@@ -13,12 +15,15 @@ OUTPUT_FILE = ROOT / "public" / "index.html"
 
 def fetch_title(url: str) -> str:
     """Récupère le titre d'une page web."""
+    # Validate URL scheme to prevent SSRF
+    if urlparse(url).scheme not in ("http", "https"):
+        return url
     try:
         with urllib.request.urlopen(url, timeout=10) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
             match = re.search(r"<title[^>]*>([^<]+)</title>", html, re.IGNORECASE)
             return match.group(1).strip() if match else url
-    except Exception:
+    except (urllib.error.URLError, TimeoutError, OSError):
         return url
 
 
@@ -28,10 +33,11 @@ def parse_events() -> list[tuple[date, str]]:
         return []
     events = []
     for line in EVENTS_FILE.read_text().splitlines():
-        if parts := line.strip().split(maxsplit=1):
+        parts = line.strip().split(maxsplit=1)
+        if len(parts) == 2:
             try:
                 events.append((date.fromisoformat(parts[0]), parts[1]))
-            except (ValueError, IndexError):
+            except ValueError:
                 pass
     return events
 
