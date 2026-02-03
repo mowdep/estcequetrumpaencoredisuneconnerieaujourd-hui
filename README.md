@@ -1,47 +1,36 @@
 # Est-ce que Trump a encore dit une connerie aujourd'hui ?
 
-Un site web 100% statique qui affiche si Trump a dit quelque chose de controversé aujourd'hui.
+Site statique affichant si Trump a dit quelque chose de controversé aujourd'hui.
 
 ## Fonctionnalités
 
 - **Indicateur Oui/Non** : Affiche si un événement a été enregistré aujourd'hui
 - **Compteur de jours** : Nombre de jours depuis la dernière entrée
-- **Dernière entrée** : Affiche le lien, titre et miniature (si disponible) de la dernière entrée
+- **Titre automatique** : Le titre de l'article est récupéré automatiquement depuis l'URL
 
-## Source de données
+## Format des données
 
-Le fichier `data/events.md` est la seule source de données éditable.
-
-### Format du fichier
+Fichier `data/events.md` :
 
 ```
-YYYY-MM-DD|URL|Titre|URLMiniature (optionnel)
+YYYY-MM-DD URL
 ```
 
 **Exemple :**
 ```
-2026-02-03|https://example.com/article|Trump dit quelque chose|https://example.com/image.jpg
-2026-02-01|https://example.com/article2|Une autre déclaration
+2026-02-03 https://example.com/article
+2026-02-01 https://example.com/article2
 ```
 
-**Règles :**
-- 1 ligne = 1 événement
-- Les lignes vides sont ignorées
-- Aucun commentaire
-- Les champs sont séparés par `|`
-- La miniature est optionnelle
-
-## Construction locale
+## Construction
 
 ```bash
-python build.py
+python3 build.py
 ```
-
-Le site est généré dans le dossier `public/`.
 
 ## Déploiement
 
-Le site est automatiquement déployé sur GitHub Pages via GitHub Actions :
-- À chaque push sur la branche `main`
+GitHub Actions déploie sur GitHub Pages :
+- À chaque push sur `main`
 - Quotidiennement à minuit UTC
 - Manuellement via workflow_dispatch

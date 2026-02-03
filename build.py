@@ -1,154 +1,75 @@
 #!/usr/bin/env python3
-"""
-Build script for the static website generator.
-Reads events from data/events.md and generates index.html.
-"""
+"""Génère un site statique à partir de data/events.md."""
 
-import os
-import sys
-from datetime import datetime, date
+import re
+import urllib.request
+from datetime import date
 from pathlib import Path
 
+ROOT = Path(__file__).parent
+EVENTS_FILE = ROOT / "data" / "events.md"
+OUTPUT_FILE = ROOT / "public" / "index.html"
 
-def parse_events(events_file: Path) -> list[dict]:
-    """Parse events from the events.md file.
-    
-    Format: YYYY-MM-DD|URL|Title|OptionalThumbnailURL
-    """
+
+def fetch_title(url: str) -> str:
+    """Récupère le titre d'une page web."""
+    try:
+        with urllib.request.urlopen(url, timeout=10) as resp:
+            html = resp.read().decode("utf-8", errors="ignore")
+            match = re.search(r"<title[^>]*>([^<]+)</title>", html, re.IGNORECASE)
+            return match.group(1).strip() if match else url
+    except Exception:
+        return url
+
+
+def parse_events() -> list[tuple[date, str]]:
+    """Parse events.md (format: YYYY-MM-DD URL)."""
+    if not EVENTS_FILE.exists():
+        return []
     events = []
-    
-    if not events_file.exists():
-        return events
-    
-    with open(events_file, 'r', encoding='utf-8') as f:
-        for line_num, line in enumerate(f, 1):
-            line = line.strip()
-            if not line:
-                continue
-            
-            parts = line.split('|')
-            if len(parts) < 3:
-                print(f"Warning: Line {line_num} has invalid format, skipping: {line}", file=sys.stderr)
-                continue
-            
+    for line in EVENTS_FILE.read_text().splitlines():
+        if parts := line.strip().split(maxsplit=1):
             try:
-                event_date = datetime.strptime(parts[0].strip(), '%Y-%m-%d').date()
-            except ValueError:
-                print(f"Warning: Line {line_num} has invalid date format, skipping: {line}", file=sys.stderr)
-                continue
-            
-            event = {
-                'date': event_date,
-                'url': parts[1].strip(),
-                'title': parts[2].strip(),
-                'thumbnail': parts[3].strip() if len(parts) > 3 else None
-            }
-            events.append(event)
-    
+                events.append((date.fromisoformat(parts[0]), parts[1]))
+            except (ValueError, IndexError):
+                pass
     return events
 
 
-def get_latest_event(events: list[dict]) -> dict | None:
-    """Get the most recent event by date."""
-    if not events:
-        return None
-    return max(events, key=lambda e: e['date'])
+def generate_html(today: date, events: list[tuple[date, str]]) -> str:
+    """Génère le HTML."""
+    has_event = any(d == today for d, _ in events)
+    latest = max(events, key=lambda e: e[0]) if events else None
+    days = max(0, (today - latest[0]).days) if latest else 0
+    title = fetch_title(latest[1]) if latest else ""
 
-
-def calculate_days_since(event_date: date, today: date) -> int:
-    """Calculate number of days since the event."""
-    return (today - event_date).days
-
-
-def has_event_today(events: list[dict], today: date) -> bool:
-    """Check if there's an event on today's date."""
-    return any(e['date'] == today for e in events)
-
-
-def generate_html(has_event: bool, days_count: int, latest_event: dict | None) -> str:
-    """Generate the static HTML page."""
-    indicator = "Oui" if has_event else "Non"
-    
-    html_parts = [
-        '<!DOCTYPE html>',
-        '<html lang="fr">',
-        '<head>',
-        '<meta charset="UTF-8">',
-        '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-        '<title>Est-ce que Trump a encore dit une connerie aujourd\'hui ?</title>',
-        '</head>',
-        '<body style="margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;">',
-        '<div style="text-align: center;">',
-        f'<h1>{indicator}</h1>',
-    ]
-    
-    if latest_event:
-        html_parts.append(f'<p>Jours sans nouvelle entrée : {days_count}</p>')
-        html_parts.append('<hr>')
-        html_parts.append('<h2>Dernière entrée</h2>')
-        
-        if latest_event.get('thumbnail'):
-            html_parts.append(f'<img src="{latest_event["thumbnail"]}" alt="Miniature">')
-        
-        html_parts.append(f'<p><a href="{latest_event["url"]}">{latest_event["title"]}</a></p>')
-        html_parts.append(f'<p>Date : {latest_event["date"].strftime("%d/%m/%Y")}</p>')
+    body = f"<h1>{'Oui' if has_event else 'Non'}</h1>"
+    if latest:
+        body += f"""<p>Jours sans nouvelle entrée : {days}</p>
+<hr>
+<h2>Dernière entrée</h2>
+<p><a href="{latest[1]}">{title}</a></p>
+<p>Date : {latest[0].strftime('%d/%m/%Y')}</p>"""
     else:
-        html_parts.append('<p>Aucune entrée enregistrée.</p>')
-    
-    html_parts.extend([
-        '</div>',
-        '</body>',
-        '</html>',
-    ])
-    
-    return '\n'.join(html_parts)
+        body += "<p>Aucune entrée enregistrée.</p>"
+
+    return f"""<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Est-ce que Trump a encore dit une connerie aujourd'hui ?</title>
+</head>
+<body style="margin:0;min-height:100vh;display:flex;justify-content:center;align-items:center">
+<div style="text-align:center">
+{body}
+</div>
+</body>
+</html>"""
 
 
-def main():
-    # Get the script directory
-    script_dir = Path(__file__).parent.resolve()
-    
-    # Paths
-    events_file = script_dir / 'data' / 'events.md'
-    output_dir = script_dir / 'public'
-    output_file = output_dir / 'index.html'
-    
-    # Ensure output directory exists
-    output_dir.mkdir(exist_ok=True)
-    
-    # Get today's date
-    today = date.today()
-    
-    # Parse events
-    events = parse_events(events_file)
-    print(f"Parsed {len(events)} events from {events_file}")
-    
-    # Get latest event
-    latest_event = get_latest_event(events)
-    
-    # Calculate days since last event (cap at 0 for future dates)
-    if latest_event:
-        days_count = max(0, calculate_days_since(latest_event['date'], today))
-    else:
-        days_count = 0
-    
-    # Check if there's an event today
-    has_event = has_event_today(events, today)
-    
-    # Generate HTML
-    html_content = generate_html(has_event, days_count, latest_event)
-    
-    # Write output
-    with open(output_file, 'w', encoding='utf-8') as f:
-        f.write(html_content)
-    
-    print(f"Generated {output_file}")
-    print(f"Today: {today}")
-    print(f"Has event today: {has_event}")
-    print(f"Days since last event: {days_count}")
-    
-    return 0
-
-
-if __name__ == '__main__':
-    sys.exit(main())
+if __name__ == "__main__":
+    OUTPUT_FILE.parent.mkdir(exist_ok=True)
+    events = parse_events()
+    OUTPUT_FILE.write_text(generate_html(date.today(), events))
+    print(f"Generated {OUTPUT_FILE} ({len(events)} events)")
