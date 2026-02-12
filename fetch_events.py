@@ -17,16 +17,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).parent
 EVENTS_FILE = ROOT / "data" / "events.md"
-
-# ── Flux RSS à surveiller ──────────────────────────────────────────────
-RSS_FEEDS: list[str] = [
-    # Le Monde – International
-    "https://www.lemonde.fr/international/rss_full.xml",
-    # France Info – Donald Trump
-    "https://www.franceinfo.fr/monde/usa/presidentielle/donald-trump.rss",
-    # Ouest-France – Donald Trump
-    "https://www.ouest-france.fr/monde/etats-unis/donald-trump/rss",
-]
+FEEDS_FILE = ROOT / "data" / "feeds.txt"
 
 # ── Mots-clés : Trump doit être le sujet ───────────────────────────────
 # Verbes / tournures indiquant que Trump *agit* ou *parle*
@@ -69,6 +60,17 @@ USER_AGENT = (
 
 
 # ── Fonctions utilitaires ──────────────────────────────────────────────
+def _load_feeds() -> list[str]:
+    """Charge la liste des flux RSS depuis data/feeds.txt."""
+    if not FEEDS_FILE.exists():
+        return []
+    return [
+        line.strip()
+        for line in FEEDS_FILE.read_text().splitlines()
+        if line.strip() and not line.strip().startswith("#")
+    ]
+
+
 def _fetch_xml(url: str) -> ET.Element | None:
     """Télécharge et parse un flux RSS/Atom."""
     if urlparse(url).scheme not in ("http", "https"):
@@ -168,7 +170,7 @@ def fetch_new_events() -> list[tuple[date, str]]:
     existing = _existing_urls()
     new_events: list[tuple[date, str]] = []
 
-    for feed_url in RSS_FEEDS:
+    for feed_url in _load_feeds():
         root = _fetch_xml(feed_url)
         if root is None:
             continue

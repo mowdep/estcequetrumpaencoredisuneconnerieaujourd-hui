@@ -39,7 +39,16 @@ GitHub Actions déploie sur GitHub Pages :
 ## Surveillance automatisée
 
 Le workflow `fetch-events.yml` exécute `fetch_events.py` toutes les 6 heures :
-1. Parcourt les flux RSS de Le Monde, France Info et Ouest-France
+1. Parcourt les flux RSS listés dans `data/feeds.txt` (un URL par ligne)
 2. Filtre les articles où **Trump est le sujet** (il dit, fait, ordonne…)
 3. Exclut les articles où Trump est la cible d'actions de tiers
 4. Ajoute les nouveaux articles dans `data/events.md` et pousse les changements
+
+### Ajouter un flux RSS
+
+Ajoutez simplement l'URL dans `data/feeds.txt` :
+
+```
+https://www.lemonde.fr/international/rss_full.xml
+https://www.franceinfo.fr/monde/usa/presidentielle/donald-trump.rss
+```
