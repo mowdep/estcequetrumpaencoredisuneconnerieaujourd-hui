@@ -1,0 +1,3 @@
+https://www.lemonde.fr/international/rss_full.xml
+https://www.franceinfo.fr/monde/usa/presidentielle/donald-trump.rss
+https://www.ouest-france.fr/monde/etats-unis/donald-trump/rss
