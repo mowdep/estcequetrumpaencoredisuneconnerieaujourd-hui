@@ -49,14 +49,14 @@ def generate_html(today: date, events: list[tuple[date, str]]) -> str:
     days = max(0, (today - latest[0]).days) if latest else 0
     title = fetch_title(latest[1]) if latest else ""
 
-    body = <h1>Est-ce que Trump a encore dit une connerie aujourd'hui ?</h1></br>
+    body = "<h1>Est-ce que Trump a encore dit une connerie aujourd'hui ?</h1></br>"
     f"<h1>{'Oui' if has_event else 'Non'}</h1>"
     if latest:
         body += f"""<p>Jours sans nouvelle entrée : {days}</p>
-<hr>
-<h2>Dernière entrée</h2>
-<p><a href="{latest[1]}">{title}</a></p>
-<p>Date : {latest[0].strftime('%d/%m/%Y')}</p>"""
+    <hr>
+    <h2>Dernière entrée</h2>
+    <p><a href="{latest[1]}">{title}</a></p>
+    <p>Date : {latest[0].strftime('%d/%m/%Y')}</p>"""
     else:
         body += "<p>Aucune entrée enregistrée.</p>"
 
