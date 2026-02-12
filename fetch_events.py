@@ -8,6 +8,7 @@ tiers…) sont filtrés.
 """
 
 import re
+import urllib.error
 import xml.etree.ElementTree as ET
 from datetime import date
 from pathlib import Path
@@ -76,7 +77,7 @@ def _fetch_xml(url: str) -> ET.Element | None:
         req = Request(url, headers={"User-Agent": USER_AGENT})
         with urlopen(req, timeout=15) as resp:
             return ET.fromstring(resp.read())
-    except Exception:
+    except (urllib.error.URLError, ET.ParseError, TimeoutError, OSError):
         return None
 
 
@@ -159,7 +160,11 @@ def _extract_date(pub_date: str, link: str) -> date | None:
 
 # ── Point d'entrée ─────────────────────────────────────────────────────
 def fetch_new_events() -> list[tuple[date, str]]:
-    """Parcourt les flux RSS et renvoie les nouveaux événements détectés."""
+    """Parcourt les flux RSS et renvoie les nouveaux événements détectés.
+
+    Renvoie une liste de tuples (date, url) triée par date, ne contenant
+    que les articles où Trump est le sujet de l'action.
+    """
     existing = _existing_urls()
     new_events: list[tuple[date, str]] = []
 
@@ -182,7 +187,10 @@ def fetch_new_events() -> list[tuple[date, str]]:
 
 
 def append_events(new_events: list[tuple[date, str]]) -> int:
-    """Ajoute les événements à events.md et renvoie le nombre ajouté."""
+    """Ajoute les événements à events.md et renvoie le nombre ajouté.
+
+    ``new_events`` est une liste de tuples (date, url) à ajouter au fichier.
+    """
     if not new_events:
         return 0
 
