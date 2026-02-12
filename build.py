@@ -73,7 +73,7 @@ def generate_html(today: date, events: list[tuple[date, str]]) -> str:
 </body>
 </html>"""
 
-<h1>Est-ce que Trump a encore dit une connerie aujourd'hui ?</h1>
+<h1>Est-ce que Trump a encore dit une connerie aujourd\'hui ?</h1>
 </br>
 if __name__ == "__main__":
     OUTPUT_FILE.parent.mkdir(exist_ok=True)
