@@ -6,3 +6,4 @@
 2026-02-12 https://www.lemonde.fr/international/article/2026/02/12/donald-trump-menace-l-iran-de-consequences-tres-traumatisantes-s-il-n-accepte-pas-un-accord-nucleaire_6666552_3210.html
 2026-02-13 https://www.franceinfo.fr/monde/usa/presidentielle/donald-trump/donald-trump-dit-vouloir-se-rendre-au-venezuela-et-continue-de-lever-l-embargo-petrolier_7804130.html#xtor=RSS-3-%5Bgeneral%5D
 2026-02-14 https://www.lemonde.fr/international/article/2026/02/14/donald-trump-menace-de-contourner-le-congres-pour-imposer-ses-reformes-electorales_6666706_3210.html
+2026-02-18 https://www.lemonde.fr/international/article/2026/02/18/donald-trump-annonce-36-milliards-de-dollars-d-investissements-japonais-aux-etats-unis_6667167_3210.html
