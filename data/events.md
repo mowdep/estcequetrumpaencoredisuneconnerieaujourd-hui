@@ -9,3 +9,5 @@
 2026-02-18 https://www.lemonde.fr/international/article/2026/02/18/donald-trump-annonce-36-milliards-de-dollars-d-investissements-japonais-aux-etats-unis_6667167_3210.html
 2026-02-19 https://www.lemonde.fr/idees/article/2026/02/19/en-asphyxiant-cuba-trump-fait-le-pari-d-un-effondrement-du-regime_6667453_3232.html
 2026-02-20 https://www.franceinfo.fr/monde/usa/donald-trump-annonce-qu-il-va-ordonner-la-publication-de-documents-sur-les-ovnis-et-les-extraterrestres-apres-une-blague-de-barack-obama_7818356.html#xtor=RSS-3-%5Bgeneral%5D
+2026-02-20 https://www.franceinfo.fr/sports/foot/gaza-donald-trump-annonce-un-fonds-de-75-millions-de-dollars-en-partenariat-avec-la-fifa-pour-des-projets-lies-au-football_7819121.html#xtor=RSS-3-%5Bgeneral%5D
+2026-02-20 https://www.lemonde.fr/international/article/2026/02/20/donald-trump-dit-envisager-une-frappe-limitee-contre-l-iran-en-l-absence-d-accord-avec-les-etats-unis_6667595_3210.html
