@@ -8,3 +8,4 @@
 2026-02-14 https://www.lemonde.fr/international/article/2026/02/14/donald-trump-menace-de-contourner-le-congres-pour-imposer-ses-reformes-electorales_6666706_3210.html
 2026-02-18 https://www.lemonde.fr/international/article/2026/02/18/donald-trump-annonce-36-milliards-de-dollars-d-investissements-japonais-aux-etats-unis_6667167_3210.html
 2026-02-19 https://www.lemonde.fr/idees/article/2026/02/19/en-asphyxiant-cuba-trump-fait-le-pari-d-un-effondrement-du-regime_6667453_3232.html
+2026-02-20 https://www.franceinfo.fr/monde/usa/donald-trump-annonce-qu-il-va-ordonner-la-publication-de-documents-sur-les-ovnis-et-les-extraterrestres-apres-une-blague-de-barack-obama_7818356.html#xtor=RSS-3-%5Bgeneral%5D
