@@ -13,3 +13,4 @@
 2026-02-20 https://www.lemonde.fr/international/article/2026/02/20/donald-trump-dit-envisager-une-frappe-limitee-contre-l-iran-en-l-absence-d-accord-avec-les-etats-unis_6667595_3210.html
 2026-02-21 https://www.lemonde.fr/international/live/2026/02/21/en-direct-droits-de-douane-donald-trump-veut-appliquer-de-nouveaux-droits-de-douane-mondiaux-de-10-l-avenir-de-l-accord-avec-l-ue-incertain_6667585_3210.html
 2026-02-21 https://www.lemonde.fr/economie/article/2026/02/21/donald-trump-impose-10-de-droits-de-douane-sur-les-importations-apres-le-revers-a-la-cour-supreme_6667668_3234.html
+2026-02-21 https://www.lemonde.fr/international/live/2026/02/21/en-direct-droits-de-douane-donald-trump-annonce-faire-passer-les-nouveaux-tarifs-mondiaux-de-10-a-15_6667585_3210.html
