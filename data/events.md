@@ -11,3 +11,4 @@
 2026-02-20 https://www.franceinfo.fr/monde/usa/donald-trump-annonce-qu-il-va-ordonner-la-publication-de-documents-sur-les-ovnis-et-les-extraterrestres-apres-une-blague-de-barack-obama_7818356.html#xtor=RSS-3-%5Bgeneral%5D
 2026-02-20 https://www.franceinfo.fr/sports/foot/gaza-donald-trump-annonce-un-fonds-de-75-millions-de-dollars-en-partenariat-avec-la-fifa-pour-des-projets-lies-au-football_7819121.html#xtor=RSS-3-%5Bgeneral%5D
 2026-02-20 https://www.lemonde.fr/international/article/2026/02/20/donald-trump-dit-envisager-une-frappe-limitee-contre-l-iran-en-l-absence-d-accord-avec-les-etats-unis_6667595_3210.html
+2026-02-21 https://www.lemonde.fr/international/live/2026/02/21/en-direct-droits-de-douane-donald-trump-veut-appliquer-de-nouveaux-droits-de-douane-mondiaux-de-10-l-avenir-de-l-accord-avec-l-ue-incertain_6667585_3210.html
