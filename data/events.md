@@ -14,3 +14,5 @@
 2026-02-21 https://www.lemonde.fr/international/live/2026/02/21/en-direct-droits-de-douane-donald-trump-veut-appliquer-de-nouveaux-droits-de-douane-mondiaux-de-10-l-avenir-de-l-accord-avec-l-ue-incertain_6667585_3210.html
 2026-02-21 https://www.lemonde.fr/economie/article/2026/02/21/donald-trump-impose-10-de-droits-de-douane-sur-les-importations-apres-le-revers-a-la-cour-supreme_6667668_3234.html
 2026-02-21 https://www.lemonde.fr/international/live/2026/02/21/en-direct-droits-de-douane-donald-trump-annonce-faire-passer-les-nouveaux-tarifs-mondiaux-de-10-a-15_6667585_3210.html
+2026-02-22 https://www.franceinfo.fr/monde/groenland/donald-trump-annonce-l-envoi-d-un-navire-hopital-au-groenland_7822385.html#xtor=RSS-3-%5Bgeneral%5D
+2026-02-22 https://www.lemonde.fr/international/article/2026/02/22/donald-trump-annonce-qu-un-navire-hopital-americain-va-se-rendre-au-groenland-pour-prendre-soin-des-nombreuses-personnes-qui-sont-malades-et-qui-ne-sont-pas-soignees_6667785_3210.html
